@@ -1,32 +1,44 @@
-class BankAccount():
-   
-   int account_number
-   string account_holder
-   double balance
+import pytest
+from main import BankAccount, SavingsAccount, Bank
 
-   deposit(), 
-   withdraw(), 
-   get_balance()
+def test_bank_account_deposit():
+    account = BankAccount("John Doe")
+    account.deposit(1000)
+    assert account.balance == 1000
 
+def test_bank_account_withdraw():
+    account = BankAccount("John Doe")
+    account.deposit(1000)
+    account.withdraw(500)
+    assert account.balance == 500
 
+def test_bank_account_with_insufficient_balance():
+    account = BankAccount("Jamie Doyle")
+    account.withdraw(100)  # Withdrawal without depositing first
+    assert account.balance == 0
 
+def test_is_valid_number_valid():
+    assert BankAccount.is_valid_number("100") == True
+    assert BankAccount.is_valid_number("12.10") == True
+    assert BankAccount.is_valid_number("0") == True
 
+def test_is_valid_number_invalid():
+    assert BankAccount.is_valid_number("abc") == False
+    assert BankAccount.is_valid_number("12.34.56") == False
+    assert BankAccount.is_valid_number("") == False
 
-# 1. BankAccount Class:
-#    - Attributes: account_number, account_holder, balance
-#    - Methods: deposit(), withdraw(), get_balance()
+def test_savings_account_interest():
+    account = SavingsAccount("Jamie Doyle", 0.05)
+    account.deposit(1000)
 
+    account.interest()
 
-2. Bank Class:
-   - Attributes: accounts (a list to store BankAccount objects)
-   - Methods: add_account(), get_account_details(), calculate_interest(), view_all_accounts()
+    expected_balance = 1000 + (1000 * 0.05)
+    assert account.balance == expected_balance    
 
+if __name__ == "__main__":
+    pytest.main()
 
-3. SavingsAccount Class (Inherits from BankAccount):
-   - Additional Attributes: interest_rate
-   - Methods: calculate_interest()
+    
 
-
-4. User Interface:
-   - A simple console-based interface to interact with the banking system.
-   - Display a menu with options to create an account, deposit, withdraw, view account details, calculate interest, and exit.
+        
