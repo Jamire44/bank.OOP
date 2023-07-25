@@ -44,30 +44,29 @@ class SavingsAccount(BankAccount):
     
 
 class Bank(object):
-    pass
-    # jamie_account = BankAccount("Jamie Doyle")
-    # jamie_account.deposit(1000)
-    # jamie_account.get_balance()
-    # jamie_account.withdraw(250)
-    # jamie_account.get_balance()
+    jamie_account = BankAccount("Jamie Doyle")
+    jamie_account.deposit(1000)
+    jamie_account.get_balance()
+    jamie_account.withdraw(250)
+    jamie_account.get_balance()
 
-    # karl_account = BankAccount("Karl Doyle")
-    # karl_account.deposit(1002)
-    # karl_account.get_balance()
-    # karl_account.withdraw(5)
-    # karl_account.get_balance()
+    karl_account = BankAccount("Karl Doyle")
+    karl_account.deposit(1002)
+    karl_account.get_balance()
+    karl_account.withdraw(5)
+    karl_account.get_balance()
 
-    # jamie_saving_account = SavingsAccount("Jamie Doyle (Savings Account)", 0.05)
-    # jamie_saving_account.deposit(1000)
-    # jamie_saving_account.get_balance()
+    jamie_saving_account = SavingsAccount("Jamie Doyle (Savings Account)", 0.05)
+    jamie_saving_account.deposit(1000)
+    jamie_saving_account.get_balance()
 
-    # jamie_saving_account.withdraw(150)
-    # jamie_saving_account.get_balance()
+    jamie_saving_account.withdraw(150)
+    jamie_saving_account.get_balance()
 
-    # jamie_saving_account.interest()
-    # jamie_saving_account.get_balance()
+    jamie_saving_account.interest()
+    jamie_saving_account.get_balance()
 
-    # jamie_saving_account.print_interest_amount()
+    jamie_saving_account.print_interest_amount()
 
 
 
@@ -85,3 +84,4 @@ if __name__ == "__main__":
 
 
 
+ 
