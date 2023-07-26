@@ -1,79 +1,50 @@
-class BankAccount(object):
-    account_count = 1000
+bank_accounts = {
+    1: {'name': 'Jamie Doyle', 'type': 'Checking', 'balance': 1000.00},
+    2: {'name': 'Karl Doyle', 'type': 'Buisness', 'balance': 750.00},
+    3: {'name': 'Michael Doyle', 'type': 'Savings', 'balance': 2500.50}
+}
 
-    def __init__(self, account_holder):
-        self.account_number = BankAccount.account_count
-        BankAccount.account_count += 1
-        self.account_holder = account_holder
-        self.balance = 0
+def get_accounts_list():
+    print('\nAccount ID   Account Name       Account Type   Balance')
+    print('------------------------------------------------------')
+    # This iterates over the dicitonary and displays it on the Screen
+    for account_id, account_info in bank_accounts.items():
 
-    def deposit(self, user_deposit):
-        self.balance += user_deposit
+        # <13, <19 makes sure that the data doesn't overfill into the other displays
+        print(f'{account_id:<13}{account_info["name"]:<19}{account_info["type"]:<13}€{account_info["balance"]:.2f}')
 
-    def withdraw(self, user_withdraw):
-        if user_withdraw > self.balance:
-            print("Insufficient Balance")
-        else:
-            self.balance -= user_withdraw
-
-    def get_balance(self):
-        print(f"Name: {self.account_holder}")
-        print(f"{self.account_holder}'s Acc Number: {self.account_number}")
-        print(f"Current balance: {self.balance}\n")
-
-    @staticmethod
-    def is_valid_number(input_string):
-        try:
-            float(input_string)
-            return True
-        except ValueError:
-            return False
-
-class SavingsAccount(BankAccount):
-    def __init__(self, account_holder, interest_rate):
-        super().__init__(account_holder)
-        self.interest_rate = interest_rate
-
-    def interest(self):
-        self.overall_interest = self.balance * self.interest_rate
-        self.balance += self.overall_interest
-        return self.balance
-    
-    def print_interest_amount(self):
-        print(f"Interest Amount: {self.overall_interest}")
-    
-
-class Bank(object):
-    jamie_account = BankAccount("Jamie Doyle")
-    jamie_account.deposit(1000)
-    jamie_account.get_balance()
-    jamie_account.withdraw(250)
-    jamie_account.get_balance()
-
-    karl_account = BankAccount("Karl Doyle")
-    karl_account.deposit(1002)
-    karl_account.get_balance()
-    karl_account.withdraw(5)
-    karl_account.get_balance()
-
-    jamie_saving_account = SavingsAccount("Jamie Doyle (Savings Account)", 0.05)
-    jamie_saving_account.deposit(1000)
-    jamie_saving_account.get_balance()
-
-    jamie_saving_account.withdraw(150)
-    jamie_saving_account.get_balance()
-
-    jamie_saving_account.interest()
-    jamie_saving_account.get_balance()
-
-    jamie_saving_account.print_interest_amount()
+def create_account():
+    name = input("Enter Account Holders Name: ")
+    account_type = input("Account Type (Savings/Checking/Business: ")
+    initial_balance = float(input("Initial Deposit Amount: €"))
+    # shows the keys and gets the max of the keys then increments 1 making the ID unique
+    account_id = max(bank_accounts.keys()) + 1
+    bank_accounts[account_id] = {"name": name, "type": account_type, "balance": initial_balance}
+    print(f"Account created succesfully! Account ID: {account_id}")
 
 
+def check_balance():
+    account_id = int(input("Enter the Account ID to check the balance: "))
+    # Gets every 
+    account_info = bank_accounts.get(account_id)
+    if account_info:
+        print(f"Account Balance: €{account_info['balance']:.2f}")
+    else: 
+        print("Invalid Account ID.")
+
+
+def main_menu():
+    pass
+
+
+check_balance()
+check_balance()
+check_balance()
 
 
 
 if __name__ == "__main__":
-    Bank()
+    main_menu()
 
 
 
