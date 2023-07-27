@@ -1,43 +1,31 @@
-import pytest
-from main import BankAccount, SavingsAccount, Bank
+import pytest 
+from main import get_accounts_list, create_account, check_balance, deposit_funds, withdraw_funds, main_menu
 
-def test_bank_account_deposit():
-    account = BankAccount("John Doe")
-    account.deposit(1000)
-    assert account.balance == 1000
+def test_get_accounts_List(capsys):
 
-def test_bank_account_withdraw():
-    account = BankAccount("John Doe")
-    account.deposit(1000)
-    account.withdraw(500)
-    assert account.balance == 500
+    bank_accounts = {
+        1: {"name": "John Doe", "type": "Savings", "balance": 1000},
+        2: {"name": "Jane Smith", "type": "Checking", "balance": 2500},
+        3: {"name": "Mike Johnson", "type": "Savings", "balance": 500},
+    }
 
-def test_bank_account_with_insufficient_balance():
-    account = BankAccount("Jamie Doyle")
-    account.withdraw(100)  # Withdrawal without depositing first
-    assert account.balance == 0
+    get_accounts_list(bank_accounts)
 
-def test_is_valid_number_valid():
-    assert BankAccount.is_valid_number("100") == True
-    assert BankAccount.is_valid_number("12.10") == True
-    assert BankAccount.is_valid_number("0") == True
+    captured = capsys.readouterr()
+    
+    expected_output = (
+        "\nAccount ID   Account Name       Account Type   Balance\n"
+        "------------------------------------------------------\n"
+        "1            John Doe           Savings       €1000.00\n"
+        "2            Jane Smith         Checking      €2500.00\n"
+        "3            Mike Johnson       Savings       €500.00\n"
+    )
 
-def test_is_valid_number_invalid():
-    assert BankAccount.is_valid_number("abc") == False
-    assert BankAccount.is_valid_number("12.34.56") == False
-    assert BankAccount.is_valid_number("") == False
+    assert captured.out == expected_output
 
-def test_savings_account_interest():
-    account = SavingsAccount("Jamie Doyle", 0.05)
-    account.deposit(1000)
 
-    account.interest()
 
-    expected_balance = 1000 + (1000 * 0.05)
-    assert account.balance == expected_balance    
 
-if __name__ == "__main__":
-    pytest.main()
 
     
 

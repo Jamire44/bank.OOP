@@ -6,7 +6,7 @@ bank_accounts = {
 
 
 
-def get_accounts_list():
+def get_accounts_list(bank_accounts):
     print('\nAccount ID   Account Name       Account Type   Balance')
     print('------------------------------------------------------')
     # This iterates over the dicitonary and displays it on the Screen
@@ -17,7 +17,7 @@ def get_accounts_list():
 
 def create_account():
     name = input("Enter Account Holders Name: ")
-    account_type = input("Account Type (Savings/Checking/Business: ")
+    account_type = input("Account Type (Savings/Checking/Business): ")
     initial_balance = float(input("Initial Deposit Amount: €"))
     # shows the keys and gets the max of the keys then increments 1 making the ID unique
     account_id = max(bank_accounts.keys()) + 1
